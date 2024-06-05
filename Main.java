@@ -1,0 +1,34 @@
+
+import java.util.ArrayList;
+public class Main {
+
+   private static ArrayList<Game> list = new ArrayList<>();
+
+    public static void findTheWinner() {
+        boolean tie = false;
+        Game king = list.get(0);
+
+        for (int i = 1; i < list.size(); i++) {
+            if (king.getRemaining() > list.get(i).getRemaining())
+                king = list.get(i);
+            if(king.getRemaining()==list.get(i).getRemaining())
+                tie = true;
+        }
+        if (tie)
+            System.out.println("It is a tie! not winner");
+        else {
+            System.out.println("The winner is " + king.getPlyName() + " with a total of " + king.getRemaining() + " points!"); //write out a tie situation, maybe display player names
+        }
+    }
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.enterGame();
+        list.add(game);
+
+        Game game2 = new Game();
+        game2.enterGame();
+        list.add(game2);
+
+        findTheWinner();
+    }
+}
